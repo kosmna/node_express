@@ -1,0 +1,246 @@
+<episode>
+One
+
+<index>
+Moons/Months | 1
+
+<title>
+kise pisim
+
+<quotation>
+spirit moon
+
+<tagline>
+Nights are long and still. Animals have very thick hair and do not move around much. Sundance makers will sing for the first time.
+
+<takeaway>
+The first moon is visible in January.
+
+
+<episode>
+Two
+
+<index>
+Moons/Months | 2
+
+<title>
+mikiso pisim
+
+<quotation>
+bald eagle moon
+
+<tagline>
+Eagles have the thickest plumes. Second Sundance singing is usually held this month. Giveaways usually bring cold weather.
+
+<takeaway>
+The second moon is visible in February.
+
+
+<episode>
+Three
+
+<index>
+Moons/Months | 3
+
+<title>
+niski pisim
+
+<quotation>
+geese moon
+
+<tagline>
+Geese return and signal the coming spring. 
+
+<takeaway>
+The third moon is visible in March.
+
+
+<episode>
+Four
+
+<index>
+Moons/Months | 4
+
+<title>
+ayik pisim
+
+<quotation>
+frog moon
+
+<tagline>
+Bears wake up. On Easter morning the sun dances. 
+Frogs begin to become active in ponds and swamps.
+
+<takeaway>
+The fourth moon is visible in April.
+
+
+<episode>
+Five
+
+<index>
+Moons/Months | 5
+
+<title>
+sakipakaw pisim
+
+<quotation>
+budding leaf / egg laying moon
+
+<tagline>
+First thunder of the year comes. Third Sundance singing is held in a lodge outside. Plants begin to bud.
+
+<takeaway>
+The fifth moon is visible in May.
+
+
+<episode>
+Six
+
+<index>
+Moons/Months | 6
+
+<title>
+ohpinawew pisim
+
+<quotation>
+hatching / fur shedding moon
+
+<tagline>
+Sundance ceremony is held. Birds hatching and animals shed their winter fur. This is the time of the summer solstice.
+
+<takeaway>
+The sixth moon is visible in June.
+
+
+<episode>
+Seven
+
+<index>
+Moons/Months | 7
+
+<title>
+opasko pisim
+
+<quotation>
+moulting moon
+
+<tagline>
+Young birds lose their down to make way for new feathers. This is medicine picking season.
+
+<takeaway>
+The seventh moon is visible in July.
+
+
+<episode>
+Eight
+
+<index>
+Moons/Months | 8
+
+<title>
+opaho pisim
+
+<quotation>
+flying up moon
+
+<tagline>
+Young birds are ready to fly. This is the season for berry picking and canning.
+
+<takeaway>
+The eighth moon is visible in August.
+
+
+<episode>
+Nine
+
+<index>
+Moons/Months | 9
+
+<title>
+wastepakaw pisim
+
+<quotation>
+bright leaf coloured moon
+
+<tagline>
+Leaves change colour. Bull moose scrape their velvet from antlers signaling mating to begin.
+
+<takeaway>
+The ninth moon is visible in September.
+
+
+<episode>
+Ten
+
+<index>
+Moons/Months | 10
+
+<title>
+kwaskaskitinow pisim
+
+<quotation>
+frozen ground / frost moon
+
+<tagline>
+Lakes and rivers start to freeze. Bears go to sleep. Frost sticks to leaves and other things outside.
+
+<takeaway>
+The tenth moon is visible in October.
+
+
+<episode>
+Eleven
+
+<index>
+Moons/Months | 11
+
+<title>
+ikopew pisim
+
+<quotation>
+fog moon
+
+<tagline>
+Freezing fog comes like a cloud touching the ground.
+
+<takeaway>
+The eleventh moon is visible in November.
+
+
+<episode>
+Twelve
+
+<index>
+Moons/Months | 12
+
+<title>
+piwacakinasis pisim
+
+<quotation>
+frost exploding / wood chips moon
+
+<tagline>
+Trees crackle from cold temperatures and extreme cold arrives. Story telling happens all winter.
+
+<takeaway>
+The twelfth moon is visible in December.
+
+
+<episode>
+Thirteen
+
+<index>
+Moons/Months | 13
+
+<title>
+kawikwenat pisim
+
+<quotation>
+overlapping / circling moon
+
+<tagline>
+New year celebrations take place and include feasting with loved ones.
+
+<takeaway>
+The 13th moon is visible in winter.

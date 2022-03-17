@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" style="overflow-y: hidden">
+
+  <head>
+    <title>The Early Years</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/styles.css" rel="stylesheet">
+    <link href="/css/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="icon" href="images/logo.png">
+  </head>
+  <body class="container-fluid" style="padding: 0px;margin: 0px; overflow-y: hidden">
+    <div class="hero-image container-fluid">
+      <div class="hero_image">
+        <img src="images/map.jpg" alt="hero-image" />
+      </div>
+      <div class="row map-view">
+        <div class="hero-text col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12">
+            <img src="images/logo.png" style="float: left; width: 50px;">
+            <div class="hero-main-text">
+                <p style="float: left;">
+                <span>
+                  <h3 class="hero_text_first_part">
+                    The Early Years
+                  </h3>
+                </span>
+                    <span>
+                  <h3 class="hero_text_second_part">&nbsp;Toolbox</h3>
+                </span>
+                </p>
+            </div>
+        </div>
+        <%if(Object.keys(siteConfData).length) { %>
+          <%for (const key in siteConfData) { %>
+            <%if(siteConfData[key].length > 1) { %>
+                <div class="site-position <%=key%> <%=key%>Position" style="    position: absolute; top:<%=siteConfData[key][0].top%>%; left: <%=siteConfData[key][0].left%>%; margin-left: -2%;">
+                    <a href="#" class="map-link dropdown" data-id="<%=key%>">
+                    <div class="d-flex">
+                      <%if(siteConfData[key][0].left < 30) { %>
+                        <h3 data-id="<%=key%>" class="top_banner_text_left dropdown"><%= siteConfData[key][0].abbreviation %></h3>
+                        <img class="dropdown site-icon" data-id="<%=key%>" src="images/map_location.png">
+                      <% } else { %>
+                        <img class="dropdown site-icon" data-id="<%=key%>" src="images/map_location.png">
+                        <h3 data-id="<%=key%>" class="top_banner_text_right dropdown"><%= siteConfData[key][0].abbreviation %></h3>
+                      <% } %>
+                    </div>
+                  </a>
+                  <div class="dropdown-menu <%=key%>Menu" style="border-radius: 40px;background-color: lightgrey;padding: 20px; top:75%;">
+                  <% for(let i = 0; i < siteConfData[key].length; i++) { %>
+                    <a class="dropdown-item" href="/home/toolbox?tab=<%=siteConfData[key][i].prefix%>" style="font-size: 15px;"><%=siteConfData[key][i].title%></a>
+                  <%}%>
+                  </div>
+                </div>
+            <% } else { %>
+              <div class="site-position <%=key%> <%=key%>Position" style="position: absolute; top:<%=siteConfData[key][0].top%>%; left: <%=siteConfData[key][0].left%>%; margin-left: -2%;">
+                <a href="#" data-href="/home/toolbox?tab=<%=siteConfData[key][0].prefix%>" class="map-link">
+                  <div class="d-flex">
+                    <%if(siteConfData[key][0].left < 30) { %>
+                      <h3 class="top_banner_text_left"><%= siteConfData[key][0].abbreviation %></h3>
+                      <img src="images/map_location.png" class="site-icon">
+                    <% } else { %>
+                      <img src="images/map_location.png" class="site-icon">
+                      <h3 class="top_banner_text_right"><%= siteConfData[key][0].abbreviation %></h3>
+                    <% } %>
+                  </div>
+                </a>
+              </div>
+            <%}%>
+          <%}%>
+        <%}%>
+
+        <div class="top_banner_button_div col text-center">
+          <!--<button type="button" class="btn btn-light top_banner_button">Select Your Location</button>-->
+          <span type="button" class="top_banner_button">Select Your Location</span>
+        </div>
+      </div>
+    </div>
+    <!-- ===============================================-->
+    <!--    JavaScripts-->
+    <!-- ===============================================-->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/functions.js"></script>
+    <script src="/js/home.js"></script>
+  </body>
+</html>

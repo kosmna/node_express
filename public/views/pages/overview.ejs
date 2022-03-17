@@ -1,0 +1,137 @@
+<%- include ("../partials/header") %>
+<body class="container-fluid" onload="tab_funtion();">
+<nav class="navbar navbar-expand-md bg-dark navbar-dark container" style="max-width: 85%;">
+    <div class="dropdown">
+        <a class="navbar-brand" href="/home">
+            <img src="/images/logo.png" style="float: left; width: 50px;">
+        </a>
+        <div class="dropdown-menu" aria-labelledby="search" style="border-radius: 40px;background-color: lightgrey;padding: 20px; top:75%;">
+            <a class="dropdown-item" href="#" style="font-size: 15px;">Select your location</a>
+            <% for(let i = 0; i < mapConfData.length; i++) { %>
+            <a class="dropdown-item" href="/home/toolbox?tab=<%=mapConfData[i].prefix%>" style="font-size: 12px;">
+                <% if(siteCode == mapConfData[i].prefix) { %>
+                    <img style="width: 20px" src="/images/check.svg">
+                <% } else { %>
+                    <img style="width: 20px">
+                <% } %>
+                <%= mapConfData[i].title %></a>
+            <% } %>
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav w-100">
+            <%for(let tabIndex = 0; tabIndex < siteConfData.title.length; tabIndex++){ %>
+            <li class="nav-item">
+                <a class="nav-link nav_link_styling ml-5 mr-4 middle" href="/detail/overview/<%=siteConfData.prefix[tabIndex]%>/<%=tabIndex+1%>"><%=siteConfData.title[tabIndex]%></a>
+            </li>
+            <%}%>
+            <li class="nav-item">
+                <% if(searchKey && searchKey != "") {%>
+                <a class="nav-link nav_link_styling ml-4 mr-4 middle" href="/home/toolBboxTips/<%=secIndex%>/<%=siteCode%>/<%=sectionCode%>?search=<%=searchKey%>">Tool Box Tips</a>
+                <%} else {%>
+                <a class="nav-link nav_link_styling ml-4 mr-4 middle" href="/home/toolBboxTips/<%=secIndex%>/<%=siteCode%>/<%=sectionCode%>">Tool Box Tips</a>
+                <%}%>
+            </li>
+            <div class="dropdown search-dropdown">
+                <a class="nav-link nav_link_styling mr-5 dropdown-toggle border-0 middle" id="search" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
+                    Search
+                </a>
+                <div class="dropdown-menu search-result" aria-labelledby="search">
+                    <div class="row" style="align-items: baseline;">
+                        <div class="col-lg-3 col-md-2 col-sm-1 col-2" style="margin-right: -5px;">
+                            <span class="fa fa-search form-control-feedback"></span>
+                        </div>
+                        <div class="form-group has-search col-lg-9 col-md-10 col-sm-11 col-10" style="padding: 0;">
+                            <input type="text" class="form-control pl-2" placeholder="Search..." style="border-radius: 40px;" id="search_field" value="<%=searchKey%>">
+                        </div>
+                    </div>
+                    <div class="search-list">
+                        <% if(search_result.length == 0) { %>
+                            <div class="ml-3" href="javascript:void(0)" style="font-size: 16px;">No result</div>
+                        <% } %>
+                        <%
+                        for(let i = 0; i < search_result.length; i++){
+                            if(!search_result[i] || !search_result[i].hasOwnProperty('episode'))
+                                continue;
+                            let link = search_result[i].link;
+                            if(searchKey && searchKey != "")
+                                link = link + "?search=" + searchKey
+                        %>
+                            <a class="dropdown-item" href="/<%=link%>" style="font-size: 12px;" ><%=search_result[i].episode %></a>
+                        <%
+                        } %>
+                    </div>
+                </div>
+            </div>
+        </ul>
+    </div>
+</nav>
+
+<div class="tool_box_sections_introduction mt-1">
+    <div class="container">
+        <div class="row mt-4">
+            <div class="tool_box_sections_introduction_part_1 container col-xl-5 col-lg-5 col-md-5 col-sm-12 col-xs-12 col-12 col-12">
+                <h4 style="font-weight: 600;">
+                    <br>
+                    <%=title%>
+                </h4>
+                <p style="font-size: 13px;">
+                    <br>
+                    <%-description%>
+                </p>
+            </div>
+            <div class="tool_box_sections_introduction_part_2 container col-xl-5 col-lg-5 col-md-5 col-sm-12 col-xs-12 col-12 col-12" style="margin-top: 40px;">
+                <div class="card" style="width: 20rem; border: 0px;">
+                    <img src="/sitedata/images/section_<%=siteCode%>_<%=sectionCode%>_rectangle_icon.png" class="card-img-top" alt="..."/>
+                    <div class="card-body" style="padding: 0px; margin-top: -15px;">
+                        <p>
+                            <div class="sec_2_one" style="">
+                                <%for(let sectionIndex = 0; sectionIndex < prefixs.length; sectionIndex++) {
+                                    let prefixVal = prefixs[sectionIndex];
+                                %>
+                                <button id="sec_2_button_<%=prefixVal%>" data-index="<%=prefixVal%>" class="btn sec_buttons" type="button" data-toggle="collapse" data-target="#button1" aria-expanded="false" aria-controls="button1" style="width: 100%; padding: 0px;" >
+                                    <div class="sec_2_two" style="color: white; font-size: 14px; background: <%=app_colors[sectionIndex]%>;">
+                                        <span class="sec_2_two_before" style="box-shadow: 0 20px 0 0 <%=app_colors[sectionIndex]%>;"></span>
+                        <p><%=titles[sectionIndex]%></p>
+                        <span class="sec_2_two_after" style="box-shadow: 0 20px 0 0 <%=app_colors[sectionIndex]%>;"></span>
+                    </div>
+                    </button>
+                    <%}%>
+                </div>
+                </p>
+                <%for(let sectionIndex = 0; sectionIndex < prefixs.length; sectionIndex++) {
+                    let prefixVal = prefixs[sectionIndex];
+                %>
+                <div id="sec_2_div_<%=prefixVal%>" data-index="<%=prefixVal%>" class="collapse sec_2_three sec_divs" style="width: 100%; display: none;">
+                    <div class="card card-body sec_2_four" style="background-color: <%=app_colors[sectionIndex]%>; color: white;border:none;border-radius: 0px 0px 25px 25px;padding-bottom: 0px;">
+                        <ol style="font-size: 15px;">
+                            <%
+                            if(siteDetailData[prefixVal-1].episode){
+                            for(let dataIndex = 0; dataIndex < siteDetailData[prefixVal-1].episode.length; dataIndex++) { %>
+                            <a href="/detail/detailview/<%=secIndex%>/<%=siteCode%>/<%=sectionCode%>/<%=prefixVal%>/<%=dataIndex+1%>" style="color: white;"><li class="li-font"><%= siteDetailData[prefixVal-1].episode[dataIndex]%></li></a>
+                            <% }
+                            }
+                            %>
+                        </ol>
+                    </div>
+                </div>
+                <%}%>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+<!-- ===============================================-->
+<!--    JavaScripts-->
+<!-- ===============================================-->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/functions.js"></script>
+</body>
+</html>

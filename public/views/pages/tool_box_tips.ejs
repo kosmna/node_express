@@ -1,0 +1,121 @@
+<%- include ("../partials/header") %>
+<body class="container-fluid" onload="tooltip_load();">
+<nav class="navbar navbar-expand-md bg-dark navbar-dark container" style="max-width: 85%;">
+    <div class="dropdown">
+        <a class="navbar-brand" href="/home">
+            <img src="/images/logo.png" style="float: left; width: 50px;">
+        </a>
+        <div class="dropdown-menu" aria-labelledby="search" style="border-radius: 40px;background-color: lightgrey;padding: 20px; top:75%;">
+            <a class="dropdown-item" href="#" style="font-size: 15px;">Select your location</a>
+            <% for(let i = 0; i < mapConfData.length; i++) { %>
+            <a class="dropdown-item" href="/home/toolbox?tab=<%=mapConfData[i].prefix%>" style="font-size: 12px;">
+                <% if(siteCode == mapConfData[i].prefix) { %>
+                    <img style="width: 20px" src="/images/check.svg">
+                <% } else { %>
+                    <img style="width: 20px">
+                <% } %>
+                <%= mapConfData[i].title %></a>
+            <% } %>
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav w-100">
+            <%for(let tabIndex = 0; tabIndex < siteConfData.title.length; tabIndex++){ %>
+            <li class="nav-item">
+                <a class="nav-link nav_link_styling ml-5 mr-4 middle" href="/detail/overview/<%=siteConfData.prefix[tabIndex]%>/<%=tabIndex+1%>"><%=siteConfData.title[tabIndex]%></a>
+            </li>
+            <%}%>
+            <li class="nav-item">
+                <% if(searchKey && searchKey != "") {%>
+                <a class="nav-link nav_link_styling ml-4 mr-4 middle" href="/home/toolBboxTips/<%=secIndex%>/<%=siteCode%>/<%=sectionCode%>?search=<%=searchKey%>">Tool Box Tips</a>
+                <%} else {%>
+                <a class="nav-link nav_link_styling ml-4 mr-4 middle" href="/home/toolBboxTips/<%=secIndex%>/<%=siteCode%>/<%=sectionCode%>">Tool Box Tips</a>
+                <%}%>
+            </li>
+            <div class="dropdown search-dropdown">
+                <a class="nav-link nav_link_styling mr-5 dropdown-toggle border-0 middle" id="search" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
+                    Search
+                </a>
+                <div class="dropdown-menu search-result" aria-labelledby="search">
+                    <div class="row" style="align-items: baseline;">
+                        <div class="col-lg-3 col-md-2 col-sm-1 col-2" style="margin-right: -5px;">
+                            <span class="fa fa-search form-control-feedback"></span>
+                        </div>
+                        <div class="form-group has-search col-lg-9 col-md-10 col-sm-11 col-10" style="padding: 0;">
+                            <input type="text" class="form-control pl-2" placeholder="Search..." style="border-radius: 40px;" id="search_field" value="<%=searchKey%>">
+                        </div>
+                    </div>
+                    <div class="search-list">
+                        <% if(search_result.length == 0) { %>
+                            <div class="ml-3" href="javascript:void(0)" style="font-size: 16px;">No result</div>
+                        <% } %>
+                        <%
+                        for(let i = 0; i < search_result.length; i++){
+                            if(!search_result[i] || !search_result[i].hasOwnProperty('episode'))
+                                continue;
+                            let link = search_result[i].link;
+                            if(searchKey && searchKey != "")
+                                link = link + "?search=" + searchKey
+                        %>
+                        <a class="dropdown-item" href="/<%=link%>" style="font-size: 12px;" ><%=search_result[i].episode %></a>
+                        <%
+                        } %>
+                    </div>
+                </div>
+            </div>
+        </ul>
+    </div>
+</nav>
+  <div class="tool_box_sections_introduction mt-1">
+    <div class="container">
+      <div class="row">
+        <div class="tool_box_sections_introduction_part_1 container col-xl-5 col-lg-5 col-md-5 col-sm-12 col-xs-12 col-12 col-12">
+         <!-- style="padding-left: 10vw;"> -->
+          <h4 style="font-weight: 600;">
+            ToolBox Tips
+          </h4>
+          <div>
+            <input type="radio" name="" checked="checked">
+            <span style="font-size: 13px; font-weight: 600;">OVERVIEW</span>
+            <p style="font-size: 13px;">This section summarizes the central takeaway message that the EY Visitor is communicating with the Toolbox card. The EY Visitor can read this description to the mother exactly as it is written or put it into her own words or draw from the resources on Elders words.</p>
+          </div>
+          <div>
+            <input type="radio" name="" checked="checked">
+            <span style="font-size: 13px; font-weight: 600;">PRACTICE</span>
+            <p style="font-size: 13px;">This section provides suggestions on how to put the card into action. It includes further information, things to think about, or suggested activities that relate to the Toolbox card.</p>
+          </div>
+          <div>
+            <input type="radio" name="" checked="checked">
+            <span style="font-size: 13px; font-weight: 600;">SELF-REFLECTION</span>
+            <p style="font-size: 13px;">This section recommends some questions that the EY Visitor can ask the mother to get a discussion going on the topic of the Toolbox card. The questions are meant to create opportunities for open and non-judgmental discussion between the EY Visitor and the mother/family members. This will allow the mother to think about the take-away and how it applies to her own daily life or baby’s life. This will also help to define where a parent needs additional supports or resources. Inuit believe that true knowledge only results from collaborative discussions and that self-reflection on that knowledge leads to wisdom.</p>
+          </div>
+          <div>
+            <input type="radio" name="" checked="checked">
+            <span style="font-size: 13px; font-weight: 600;">RESOURCES</span>
+            <p style="font-size: 13px;">This section is a resource for the EY Visitor to prepare for the home visit in advance, give her more information about the card topic, direct her back to the corresponding e-module, and/ or provide her with handouts to take on a home visit and offer to the mother. In every way, the resources recommended in this section are meant to support the Toolbox card and are culturally explicit. Resources such as the inunnguiniq Childrearing Advice From Inuit Elders booklet and the series of four family resource booklets and pregnancy pamphlets stay with the family for on-going reference.</p>
+          </div>
+        </div>
+        <div class="tool_box_sections_introduction_part_2 container col-xl-5 col-lg-5 col-md-5 col-sm-12 col-xs-12 col-12 col-12" style="display: flex; justify-content: center; align-items: center;">
+          <div class="card" style="width: 20rem; border: 0px;"> 
+            <img
+              src="/images/tool_box_tip.png"
+              class="card-img-top"
+              alt="..."
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ===============================================-->
+  <!--    JavaScripts-->
+  <!-- ===============================================-->
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/popper.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  <script src="/js/functions.js"></script>
+</body>
+</html>

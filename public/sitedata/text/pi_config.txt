@@ -1,0 +1,195 @@
+<title>
+Pregnancy, Prenatal + Birth
+
+<description>
+Activities to support a pregnant woman in preparing for the birth of her baby.
+
+<color>
+#D8B2C4
+
+<prefix>
+pi_ppb
+
+<section_tabs>
+{
+<title>
+PRENATAL - 12 MONTHS
+<prefix>
+1
+<app_color> 
+#D8B2C4 
+}
+
+
+<title>
+Nurturing Care
+
+<description>
+Activities to enhance adults’ basic care skills and nurture a strong attachment relationship with infants and young children.
+
+<color>
+#E6806A
+
+<prefix>
+pi_nc
+
+<section_tabs>
+{
+<title>
+PRENATAL - 12 MONTHS
+<prefix>
+1
+<app_color> 
+#E6806A 
+
+<title>
+12 MONTHS - 24 MONTHS
+<prefix>
+2
+<app_color> 
+#E6806A 
+
+<title>
+24 MONTHS - 48 MONTHS
+<prefix>
+3
+<app_color> 
+#E6806A 
+}
+
+
+<title>
+Family Well-being
+
+<description>
+Activities to support mothers’ and other primary caregivers’ life skills and ability to cope with difficulties.
+
+<color>
+#D8D458
+
+<prefix>
+pi_fwb
+
+<section_tabs>
+{
+<title>
+PRENATAL - 12 MONTHS
+<prefix>
+1
+<app_color> 
+#D8D458 
+
+<title>
+12 MONTHS - 24 MONTHS
+<prefix>
+2
+<app_color> 
+#D8D458 
+
+<title>
+24 MONTHS - 48 MONTHS
+<prefix>
+3
+<app_color> 
+#D8D458 
+}
+
+
+
+<title>
+Meaningful Moments
+
+<description>
+Activities to support infants’ and young children’s early learning and development through experiences that maximize children’s play
+
+<color>
+#9B7AAA
+
+<prefix>
+pi_mm
+
+<section_tabs>
+{
+<title>
+PRENATAL - 12 MONTHS
+<prefix>
+1
+<app_color> 
+#9B7AAA 
+
+<title>
+12 MONTHS - 24 MONTHS
+<prefix>
+2
+<app_color> 
+#9B7AAA 
+
+<title>
+24 MONTHS - 48 MONTHS
+<prefix>
+3
+<app_color> 
+#9B7AAA 
+}
+
+
+
+<title>
+Language Matters
+
+<description>
+Activities to support infants and young children’s language development.
+
+<color>
+#A3D6B1
+
+<prefix>
+pi_lm
+
+<section_tabs>
+{
+<title>
+PRENATAL - 12 MONTHS
+<prefix>
+1
+<app_color> 
+#A3D6B1 
+
+<title>
+12 MONTHS - 24 MONTHS
+<prefix>
+2
+<app_color> 
+#A3D6B1 
+
+<title>
+24 MONTHS - 48 MONTHS
+<prefix>
+3
+<app_color> 
+#A3D6B1 
+}
+
+
+
+<title>
+Engaging Environments
+
+<description>
+Activities to encourage children’s curiosity and exploration by setting up the spaces where they learn and grow.   
+
+<color>
+#78ABA4
+
+<prefix>
+pi_ee
+
+<section_tabs>
+{
+<title>
+24 MONTHS - 48 MONTHS
+<prefix>
+3
+<app_color> 
+#78ABA4 
+}

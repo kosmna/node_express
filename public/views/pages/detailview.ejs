@@ -1,0 +1,210 @@
+<%- include ("../partials/header") %>
+<script type="text/javascript">
+  var main_text_arr = [];
+  <%if(siteDetailData[prefix - 1].episode){%>
+    main_text_arr = <%- JSON.stringify(siteDetailData[prefix - 1].episode) %>;
+  <%}%>
+  var main_title_arr = [];
+  <%if(siteDetailData[prefix - 1].title){%>
+    main_title_arr = <%- JSON.stringify(siteDetailData[prefix - 1].title) %>;
+  <%}%>
+  var image_arr = [];
+  <%if(siteDetailData[prefix - 1].image){%>
+  image_arr= <%- JSON.stringify(siteDetailData[prefix - 1].image) %>;
+  <%}%>
+</script>
+<body class="container-fluid" onload="slide_funtion();">
+<input type="hidden" id="category" value="">
+<input type="hidden" id="current_tab" value="">
+<nav class="navbar navbar-expand-md bg-dark navbar-dark container" style="max-width: 85%;">
+  <div class="dropdown">
+    <a class="navbar-brand" href="/home">
+      <img src="/images/logo.png" style="float: left; width: 50px;">
+    </a>
+    <div class="dropdown-menu" aria-labelledby="search" style="border-radius: 40px;background-color: lightgrey;padding: 20px; top:75%;">
+      <a class="dropdown-item" href="#" style="font-size: 15px;">Select your location</a>
+        <% for(let i = 0; i < mapConfData.length; i++) { %>
+        <a class="dropdown-item" href="/home/toolbox?tab=<%=mapConfData[i].prefix%>" style="font-size: 12px;">
+            <% if(siteCode == mapConfData[i].prefix) { %>
+                <img style="width: 20px" src="/images/check.svg">
+            <% } else { %>
+                <img style="width: 20px">
+            <% } %>
+            <%= mapConfData[i].title %></a>
+        <% } %>
+    </div>
+  </div>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav w-100">
+      <%for(let tabIndex = 0; tabIndex < siteConfData.title.length; tabIndex++){ %>
+      <li class="nav-item">
+        <a class="nav-link nav_link_styling ml-5 mr-4 middle" href="/detail/overview/<%=siteConfData.prefix[tabIndex]%>/<%=tabIndex+1%>"><%=siteConfData.title[tabIndex]%></a>
+      </li>
+      <%}%>
+      <!--<li class="nav-item">
+        <a class="nav-link nav_link_styling ml-4 mr-4" href="/home/toolBboxTips">Tool Box Tips</a>
+      </li>-->
+      <li class="nav-item">
+        <% if(searchKey && searchKey != "") {%>
+        <a class="nav-link nav_link_styling ml-4 mr-4 middle" href="/home/toolBboxTips/<%=secindex%>/<%=siteCode%>/<%=sectionCode%>?search=<%=searchKey%>">Tool Box Tips</a>
+        <%} else {%>
+        <a class="nav-link nav_link_styling ml-4 mr-4 middle" href="/home/toolBboxTips/<%=secindex%>/<%=siteCode%>/<%=sectionCode%>">Tool Box Tips</a>
+        <%}%>
+      </li>
+      <div class="dropdown search-dropdown">
+        <a class="nav-link nav_link_styling mr-5 dropdown-toggle border-0" id="search" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
+          Search
+        </a>
+        <div class="dropdown-menu search-result" aria-labelledby="search">
+          <div class="row" style="align-items: baseline;">
+            <div class="col-lg-3 col-md-2 col-sm-1 col-2" style="margin-right: -5px;">
+              <span class="fa fa-search form-control-feedback"></span>
+            </div>
+            <div class="form-group has-search col-lg-9 col-md-10 col-sm-11 col-10" style="padding: 0;">
+              <input type="text" class="form-control pl-2" placeholder="Search..." style="border-radius: 40px;" id="search_field" value="<%=searchKey%>">
+            </div>
+          </div>
+          <div class="search-list">
+            <% if(search_result.length == 0) { %>
+              <div class="ml-3" href="javascript:void(0)" style="font-size: 16px;">No result</div>
+            <% } %>
+          <%
+          for(let i = 0; i < search_result.length; i++){
+            if(!search_result[i] || !search_result[i].hasOwnProperty('episode'))
+              continue;
+            let link = search_result[i].link;//.replace("tabIndex", tab)
+            if(searchKey && searchKey != "")
+              link = link + "?search=" + searchKey
+          %>
+          <a class="dropdown-item" href="/<%=link%>" style="font-size: 12px;" ><%=search_result[i].episode %></a>
+          <%
+          } %>
+          </div>
+        </div>
+      </div>
+    </ul>
+  </div>
+</nav>
+<div class="tool_box_sections_introduction mt-1 mb-5">
+  <div class="container">
+    <div class="row">
+      <div class="point_img col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-12 col-12 col-12 d-flex detail-img">
+      </div>
+      <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-12 col-12 col-12" style="margin-top: auto; margin-bottom: auto;">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12 col-12 point_text">
+              <p style="font-size: 36px;" id="main_text"><%= siteDetailData[prefix - 1].episode[parseInt(slider)-1] %></p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12 col-12 point_button_div">
+              <%if(siteDetailData[prefix - 1].hasOwnProperty('title') && siteDetailData[prefix - 1].title.length > 0) { %>
+                <% if(siteDetailData[prefix - 1].title[parseInt(slider) - 1].length > 45) { %>
+                <marquee class="btn mt-lg-3 point_button" style="width: 80%;background-color: <%=(app_colors.length==1)?app_colors[0]:app_colors[prefix - 1]%>; font-weight: 600 !important;border-radius: 50px;letter-spacing: 0.5px; font-family: 'Open Sans';" id="main_title">
+                  <%= siteDetailData[prefix - 1].title[parseInt(slider) - 1] %>
+                </marquee>
+                <% } else { %>
+                <span class="btn mt-lg-3 point_button" type="button" style="width: 80%;background-color: <%=(app_colors.length==1)?app_colors[0]:app_colors[prefix - 1]%>; font-weight: 600;border-radius: 50px;letter-spacing: 0.5px;" id="main_title">
+                      <%= siteDetailData[prefix - 1].title[parseInt(slider) - 1] %>
+                    </span>
+                <% } %>
+              <% } %>
+                <a href="javascript:void(0)" onclick="play()" class="playbtn" style="display: none;"><img src="/images/speakericon.png" style="width: 25px" class="speaker-icon mt-lg-3"></a>
+              <input type="hidden" id="current_index" value="<%= slider %>">
+              <input type="hidden" id="siteCode" value="<%=siteCode%>">
+              <input type="hidden" id="sectionCode" value="<%=sectionCode%>">
+              <input type="hidden" id="prefix" value="<%=prefix%>">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container slider_main mb-5">
+    <div id="demo" class="carousel slide" data-ride="carousel" data-interval="false"
+         style="background-color: <%=(app_colors.length==1)?app_colors[0]:app_colors[prefix - 1]%>;width: 100% !important;">
+      <div class="carousel-inner">
+        <% for(let dataindex = 0; dataindex < siteDetailData[prefix - 1].episode.length; dataindex++) { %>
+          <div class="carousel-item" id="slide-<%= dataindex+1 %>">
+            <div class="carousel-caption">
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12" style="">
+                  <% let cardIndex = siteDetailData[prefix - 1].index[dataindex].split("|") %>
+                  <% if(cardIndex.length > 1) { %>
+                  <p id="intro" style="font-size: 12px;text-align: right;font-weight: 500;"><a class="text-white" href="/detail/overview/<%=siteCode%>_<%=sectionCode%>/<%=secindex%>"><%= cardIndex[0] %></a> | <%= cardIndex[1] %></p>
+                  <% } %>
+                </div>
+              </div>
+              <%if(siteDetailData[prefix - 1].hasOwnProperty('tagline')) { %>
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12" style="">
+                  <h4 id="intro_heading" class="mb-5" style="color: black; font-weight: 600;text-align: left;"><%= siteDetailData[prefix - 1].tagline[dataindex] %></h4>
+                </div>
+              </div>
+                <%}%>
+              <%if(siteDetailData[prefix - 1].hasOwnProperty('takeaway')) { %>
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12" style="">
+                  <p id="intro_para" style="text-align: left;font-weight: 500;"><%= siteDetailData[prefix - 1].takeaway[dataindex] %></p>
+                </div>
+              </div>
+              <%}%>
+
+              <%if(siteDetailData[prefix - 1].quotation !== undefined) { %>
+              <div class="row mt-3">
+                <div id="intro_button_div" class="col-xl-6 col-lg-6 col-md-8 col-sm-8 col-xs-12 col-12 col-12 point_button" style="text-align: left;">
+                  <p id="intro_button" style="">
+                    <%= siteDetailData[prefix - 1].quotation[dataindex] %>
+                  </p>
+                </div>
+              </div>
+              <%}%>
+            </div>
+          </div>
+        <% } %>
+      </div>
+      <a class="carousel-control-prev" href="#demo" data-slide="prev">
+        <i id="intro_left_arrow" class='carousel_arrow fa fa-caret-left fa-4x'
+           onclick="slider_prev_funtion();"></i>
+      </a>
+      <a class="carousel-control-next" href="#demo" data-slide="next">
+        <i id="intro_right_arrow" class='carousel_arrow fa fa-caret-right fa-4x'
+           onclick="slider_next_funtion();"></i>
+      </a>
+    </div>
+  </div>
+  <% for(let contentIndex = 0; contentIndex < siteDetailData[prefix - 1].episode.length; contentIndex++) { %>
+  <div class="container mt-5 data-contents <%if (contentIndex == parseInt(slider) - 1) { %>content-show<% } else { %> content-hidden <% } %>" id="content-<%= contentIndex+1 %>">
+    <%if(siteDetailData[prefix - 1].hasOwnProperty('overview')) { %>
+    <p><span><b>OVERVIEW</b></span><br> <%- siteDetailData[prefix - 1].overview[contentIndex] %> </p>
+    <%}%>
+    <%if(siteDetailData[prefix - 1].hasOwnProperty('practice')) { %>
+    <p><span><b>PRACTICE</b></span><br> <%- siteDetailData[prefix - 1].practice[contentIndex] %> </p>
+    <%}%>
+    <%if(siteDetailData[prefix - 1].hasOwnProperty('reflection')) { %>
+    <p><span><b>REFLECTION</b></span><br>
+      <%- siteDetailData[prefix - 1].reflection[contentIndex] %>
+    </p>
+    <%}%>
+    <%if(siteDetailData[prefix - 1].hasOwnProperty('inthecentre')) { %>
+      <p><span><b>IN THE CENTRE</b></span><br> <%- siteDetailData[prefix - 1].inthecentre[contentIndex] %> </p>
+    <%}%>
+    <%if(siteDetailData[prefix - 1].hasOwnProperty('buildson')) { %>
+      <p><span><b>BUILDS ON</b></span><br> <%- siteDetailData[prefix - 1].buildson[contentIndex] %> </p>
+    <%}%>
+  </div>
+  <% } %>
+</div>
+    <!-- ===============================================-->
+    <!--    JavaScripts-->
+    <!-- ===============================================-->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/functions.js"></script>
+  </body>
+</html>

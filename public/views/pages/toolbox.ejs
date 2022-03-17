@@ -1,0 +1,125 @@
+<%- include ("../partials/header") %>
+  <body class="container-fluid" style="padding: 0px;margin: 0px;" onload="tab_funtion();">
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark container" style="max-width: 90%;">
+      <div class="dropdown">
+        <a class="navbar-brand" href="/home">
+          <img src="/images/logo.png" style="float: left; width: 50px;">
+          <div class="hero-main-text">
+            <p style="float: left;">
+                <span>
+                  <h3 class="hero_text_first_part">
+                    The Early Years
+                  </h3>
+                </span>
+              <span>
+                  <h3 class="hero_text_second_part">&nbsp;Toolbox</h3>
+                </span>
+            </p>
+          </div>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="search" style="border-radius: 40px;background-color: lightgrey;padding: 20px; top:75%;">
+          <a class="dropdown-item" href="#" style="font-size: 15px;">Select your location</a>
+          <% for(let i = 0; i < mapConfData.length; i++) { %>
+            <a class="dropdown-item" href="/home/toolbox?tab=<%=mapConfData[i].prefix%>" style="font-size: 12px;">
+              <% if(siteCode == mapConfData[i].prefix) { %>
+                <img style="width: 20px" src="/images/check.svg">
+              <% } else { %>
+                <img style="width: 20px">
+              <% } %>
+              <%= mapConfData[i].title %></a>
+          <% } %>
+        </div>
+      </div>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar" style="margin-left: auto;">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+          <li class="nav-item w-100">
+            <% if(searchKey && searchKey != "") {%>
+            <a class="nav-link nav_link_styling ml-4 mr-4 middle" href="/home/toolBboxTips/<%=secIndex%>/<%=siteCode%>/<%=sectionCode%>?search=<%=searchKey%>">Tool Box Tips</a>
+            <%} else {%>
+            <a class="nav-link nav_link_styling ml-4 mr-4 middle" href="/home/toolBboxTips/<%=secIndex%>/<%=siteCode%>/<%=sectionCode%>">Tool Box Tips</a>
+            <%}%>
+          </li>
+          <div class="dropdown search-dropdown">
+            <a class="nav-link nav_link_styling ml-4 mr-4 dropdown-toggle border-0 middle" id="search" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
+              Search
+            </a>
+            <div class="dropdown-menu search-result" aria-labelledby="search">
+              <div class="row" style="align-items: baseline;">
+                <div class="col-lg-3 col-md-2 col-sm-1 col-2" style="margin-right: -5px;">
+                  <span class="fa fa-search form-control-feedback"></span>
+                </div>
+                <div class="form-group has-search col-lg-9 col-md-10 col-sm-11 col-10" style="padding: 0;">
+                  <input type="text" class="form-control pl-2" placeholder="Search..." style="border-radius: 40px;" id="search_field" value="<%=searchKey%>">
+                </div>
+              </div>
+              <div class="search-list">
+                <% if(search_result.length == 0) { %>
+                  <div class="ml-3" href="javascript:void(0)" style="font-size: 16px;">No result</div>
+                <% } %>
+                <%
+                for(let i = 0; i < search_result.length; i++){
+                    if(!search_result[i] || !search_result[i].hasOwnProperty('episode'))
+                      continue;
+                    let link = search_result[i].link;
+                    if(searchKey && searchKey != "")
+                      link = link + "?search=" + searchKey;
+                %>
+                <a class="dropdown-item" href="/<%=link%>" style="font-size: 12px;" ><%=search_result[i].episode %></a>
+                <%
+                } %>
+              </div>
+            </div>
+          </div>
+        </ul>
+      </div>
+    </nav>
+    <div class="tool_box_sections">
+      <section id="tabs">
+        <div class="container-fluid">
+          <div class="row m-2">
+            <div class="col-12">
+              <nav>
+                <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                </div>
+              </nav>
+              <div class="tab-content pt-5 px-3 px-sm-0 mt-2" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-2" role="tabpanel" aria-labelledby="nav-2-tab">
+                  <div class="container-fluid">
+                    <!-- 2nd tab 1st row -->
+                    <div class="row">
+                      <% for(let dataIndex = 0; dataIndex < confData['title'].length; dataIndex++) { %>
+                      <div class="mb-2 col-xl-4 col-lg-4 col-md-4 col-sm-6 col-xs-12 col-12 section-wrap">
+                        <a href="/detail/overview/<%= confData['prefix'][dataIndex]%>/<%=dataIndex+1%>" class="tab_sub_text_div" style="color: black;">
+                          <img class="img-fluid tab-img" src="/sitedata/images/section_<%= confData['prefix'][dataIndex].replace("\r", "")%>_rectangle_icon.png">
+                        </a>
+                        <p class="mt-2 tab_main_text">
+                          <%=confData['title'][dataIndex]%>
+                        </p>
+                        <div class="tab_sub_text_div">
+                          <p class="tab_sub_text">
+                            <%=confData['description'][dataIndex]%>
+                          </p>
+                        </div>
+                      </div>
+                      <% } %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <!-- ===============================================-->
+    <!--    JavaScripts-->
+    <!-- ===============================================-->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/functions.js"></script>
+  </body>
+</html>
